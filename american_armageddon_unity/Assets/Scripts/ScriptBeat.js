@@ -1,5 +1,5 @@
 ﻿#pragma strict
-
+/*
     public class StoryCharacter {
 
         var _cn : String; // name
@@ -9,6 +9,7 @@
         var _ff : String; // faction
         var _nn : String; // nemesis
         var _dn : String[]; // domains
+        var _pl : boolean; // plural
 
         function StoryCharacter(  cn : String,
                                   pp : String,
@@ -16,7 +17,8 @@
                                   on : String,
                                   ff : String,
                                   nn : String,
-                                  dn : String[] ) {
+                                  dn : String[],
+                                  pl : boolean ) {
 
             this._cn = cn;
             this._pp = pp;
@@ -25,7 +27,10 @@
             this._ff = ff;
             this._nn = nn;
             this._dn = dn;
+            this._pl = pl;
         }
+
+
 
     }
 
@@ -49,23 +54,24 @@
 
     public class ScriptBeat extends MonoBehaviour {
 
+        var twineManager : GameObject;
         var scriptCharacters : StoryCharacter[];
         var twineTitles : String[];
         var twinePassages : Dictionary.<String,TwinePassage>;
 
-        function LoadData() {
+        function Start() {
 
             // create new characters and store in an array
-            var duke : StoryCharacter = new StoryCharacter("Duke","he","his","Herzog","the group","the militia",["generic","justice","chaos"]);
-            var herzog : StoryCharacter = new StoryCharacter("Herzog","he","his","Duke","his congregation","the group",["generic","gain","order"]);
-            var maggie : StoryCharacter = new StoryCharacter("Maggie","she","her","Bubonic Jil","the group","the undead",["generic","justice","order"]);
-            var jil : StoryCharacter = new StoryCharacter("Bubonic Jil","she","her","Duke","the militia","the congregation",["generic","gain","chaos"]);
+            var duke : StoryCharacter = new StoryCharacter("Duke","he","his","Herzog","the group","the undead",["generic","justice","chaos"],false);
+            var herzog : StoryCharacter = new StoryCharacter("Herzog","he","his","Duke","his congregation","the undead",["generic","gain","order"],false);
+            var maggie : StoryCharacter = new StoryCharacter("Maggie","she","her","Herzog","the group","the militia",["generic","justice","order"],false);
+            var jil : StoryCharacter = new StoryCharacter("Bubonic Jil","she","her","Maggie","the militia","the congregation",["generic","gain","chaos"],false);
 
             scriptCharacters = [duke, herzog, maggie, jil];
 
             // get Twine passages from TwineManager
-            twinePassages = gameObject.GetComponent(TwineManager).GetPassages();
-            twineTitles = gameObject.GetComponent(TwineManager).GetTitles();
+            twinePassages = twineManager.GetComponent(TwineManager).GetPassages();
+            twineTitles = twineManager.GetComponent(TwineManager).GetTitles();
 
             for(var i : int = 0;i < 200; i++){
 
@@ -78,7 +84,7 @@
         function FindTitle(title:String) : boolean {
 
             if(System.Array.IndexOf(twineTitles, title) == -1){
-                Debug.Log("broken link" + title);
+                Debug.Log("broken link: " + title);
                 return false;
             }
             else{
@@ -122,7 +128,7 @@
 
             //select verb domain
             var getVerbType : String = pov._dn[Random.Range(0,pov._dn.Length)];
-            var verbType = twinePassages[getVerbType];
+            var verbType : TwinePassage = twinePassages[getVerbType];
             // select from list of link passages
             var verbLink : String = verbType.GetRandomLink();
             if(verbLink != null && FindTitle(verbLink)) {
@@ -235,3 +241,4 @@
 
 
     }
+*/

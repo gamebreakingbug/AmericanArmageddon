@@ -77,6 +77,24 @@ import System.Text;
             }
         }
 
+        function GetBeat() : Beat {
+
+            var b : Beat;
+
+            if(CheckTag("drama")){
+                b = Beat.Drama;
+            }
+            else if(CheckTag("action")){
+                b = Beat.Action;
+            }
+            else if(CheckTag("break")){
+                b = Beat.Break;
+            }
+
+            return b;
+
+        }
+
     }
 
     public class TwineManager extends MonoBehaviour {
@@ -165,7 +183,7 @@ import System.Text;
 
         }
 
-        function Start() {
+        function Awake() {
 
             // Load the twine source file from resources and store the text as a huge String
             //twineSourceAsset = Resources.Load("storybeats") as TextAsset;
@@ -178,7 +196,8 @@ import System.Text;
             titles = new String[passages.Count];
             passages.Keys.CopyTo(titles, 0);
 
-            gameObject.GetComponent(ScriptBeat).LoadData();
+            //send dictionary of passages and passage title reference array to ScriptBeat
+            //gameObject.GetComponent(ScriptBeat).LoadData();
         }
 
     }
