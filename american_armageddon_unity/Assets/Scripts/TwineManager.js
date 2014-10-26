@@ -90,6 +90,9 @@ import System.Text;
             else if(CheckTag("break")){
                 b = Beat.Break;
             }
+            else{
+                b = Beat.Null;
+            }
 
             return b;
 
@@ -196,8 +199,6 @@ import System.Text;
             titles = new String[passages.Count];
             passages.Keys.CopyTo(titles, 0);
 
-            //send dictionary of passages and passage title reference array to ScriptBeat
-            //gameObject.GetComponent(ScriptBeat).LoadData();
         }
 
     }

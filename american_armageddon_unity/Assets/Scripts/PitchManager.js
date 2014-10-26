@@ -1,6 +1,7 @@
 ﻿#pragma strict
 
-    enum Beat{Drama, Action, Break};
+    enum Beat{Drama, Action, Break, Null};
+    public var textBoxPrefab : GameObject;
 
     public class PitchManager extends MonoBehaviour {
 
@@ -88,10 +89,13 @@
             twinePassages = twineManager.GetComponent(TwineManager).GetPassages();
             twineTitles = twineManager.GetComponent(TwineManager).GetTitles();
 
-            for(var i : int = 0;i < 10; i++){
+            var textTest : String;
 
-                Debug.Log(WriteStoryBeat()._text);
-            }
+            textTest = WriteStoryBeat()._text;
+
+            var tBox : GameObject = Instantiate (textBoxPrefab, Vector3(0, 0, 0), Quaternion.identity);
+            tBox.GetComponent(TextBoxClass).SetText(textTest);
+
 
         }
 
@@ -144,7 +148,7 @@
         var _beat : Beat;
         var _role : StoryCharacter;
 
-        function StoryBeat(  text : String,
+        function StoryBeat(   text : String,
                               beat : Beat,
                               role : StoryCharacter ) {
 
